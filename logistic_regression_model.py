@@ -7,7 +7,7 @@ def sigmoid(x):
 class LogisticRegression():
 
 
-    def __init__(self, lr=0.001, n_iters=10000):
+    def __init__(self, lr=0.001, n_iters=1000):
         self.lr = lr
         self.n_iters = n_iters
         self.weights = None
@@ -56,18 +56,21 @@ class LogisticRegression():
 
             #average of total error
             average_total_error = np.sum(np.abs((error)))/len(X)
-            print("iteration " + str(i) + " average error " + str(average_total_error))
+            #print("iteration " + str(i) + " average error " + str(average_total_error))
 
             print(" ")
             print(" ")
 
 
-
+            print("the type of dw " + str(dw.shape))
             self.weights = self.weights - self.lr*dw
             self.bias = self.bias - self.lr*db
 
-            #print("iteration" + str(i) + str(dw))
+            #print("weights: " + str(i) + str(self.weights))
             #print(str(type(dw)))
+
+        print(" weight: "+  str(self.weights))
+
 
 
 
