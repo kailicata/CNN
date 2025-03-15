@@ -70,7 +70,7 @@ class TokenAndPositionEmbedding(layers.Layer):
 
 
 #download and prepare dataset
-vocab_size = 3000
+vocab_size = 130000
 maxlen = 200
 (x_train, y_train), (x_val, y_val) = keras.datasets.imdb.load_data(num_words=vocab_size)
 
@@ -101,19 +101,6 @@ outputs = layers.Dense(2, activation="softmax")(x)
 model = keras.Model(inputs=inputs, outputs=outputs)
 
 
-#train and evlaluate
-
-train_model = False
-if train_model == True:
-    model.compile(optimizer="adam", loss="sparse_categorical_crossentropy", metrics=["accuracy"])
-    history = model.fit(
-        x_train, y_train, batch_size=32, epochs=5, validation_data=(x_val, y_val)
-    )
-
-
-
-
-
 def save_model(model, filename="transformer_model.keras"):
     model.save(filename)
     print(f"Model saved to {filename}")
@@ -129,9 +116,25 @@ def load_trained_model(filename="transformer_model.keras"):
     print(f"Model loaded from {filename}")
     return model
 
+#train and evlaluate
 
-#save_model(model)
-model = load_trained_model()
+train_model = False
+if train_model == True:
+    model.compile(optimizer="adam", loss="sparse_categorical_crossentropy", metrics=["accuracy"])
+    history = model.fit(
+        x_train, y_train, batch_size=32, epochs=5, validation_data=(x_val, y_val)
+    )
+    save_model(model)
+else:
+    model = load_trained_model()
+
+
+
+
+
+
+
+
 
 
 def predict_sentiment(model, tokenized_input):
@@ -173,8 +176,14 @@ def tokenize_text(text, word_index, maxlen=200):
     #print(f"Final Tokenized Sequence: {padded_sequence}\n")
     return padded_sequence
 
+text_input = "Luna on the Moon is a magical journey that captivates from the very first frame. The animation is absolutely stunning, with each scene bursting with color and creativity. Luna’s story is one of adventure, perseverance, and self-discovery, making her a truly inspiring protagonist. Every moment is filled with wonder, and the emotional depth of the story makes it even more special. The film’s soundtrack is enchanting, seamlessly blending with the visuals to create an unforgettable cinematic experience. The dialogue is both witty and heartfelt, bringing the characters to life in the most genuine way. The themes of following your dreams and overcoming challenges are presented in such a beautiful and meaningful manner. Every detail in this film is crafted with care, making it an absolute delight to watch. It’s one of those rare movies that can make you feel like a kid again, filled with excitement and wonder. Whether you’re young or old, Luna on the Moon will leave you with a heart full of inspiration. It’s an animated masterpiece that deserves to be seen by everyone!"
 
-text_input = "This was the best movie I have ever seen. I loved every moment of it!"
+
+
+
+
+
+
 """
     "I really enjoyed this film. The characters were well-developed and the story was captivating.",
     "What a waste of time! The plot made no sense and the acting was terrible.",
