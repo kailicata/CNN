@@ -163,6 +163,7 @@ else:
 
 
 #the model gest 4/5 correct but the confidence needs to be more precise. right now confidence is around 50%. 
+#re run samples on other keras tokenizer sample - same results?
 
 
  
