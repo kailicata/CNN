@@ -1,0 +1,9 @@
+numpy
+matplotlib
+scikit-learn
+k-wave-python
+keras
+tensorflow
+torch 
+torchvision 
+torchaudio
